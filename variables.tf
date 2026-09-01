@@ -75,6 +75,6 @@ variable "aws_s3_bucket_public_access_block_ignore_public_acls" {
 
 variable "aws_s3_bucket_public_access_block_restrict_public_buckets" {
   type        = bool
-  description = "(optiona) Indicates whether Amazon S3 should restrict public bucket policies for this bucket"
+  description = "(optional) Indicates whether Amazon S3 should restrict public bucket policies for this bucket"
   default     = true
 }
