@@ -4,6 +4,30 @@ variable "bucket_name" {
   description = "The name of the bucket"
 }
 
+# aws_s3_bucket_logging variables
+variable "enable_access_logging" {
+  type        = bool
+  description = "(optional) Indicates whether S3 server access logging is enabled for this bucket"
+  default     = false
+}
+
+variable "logging_target_bucket" {
+  type        = string
+  description = "(optional) The name of the bucket that receives the server access logs, required if enable_access_logging is true"
+  default     = null
+
+  validation {
+    condition     = !var.enable_access_logging || (var.logging_target_bucket != null && var.logging_target_bucket != "")
+    error_message = "logging_target_bucket must be set when enable_access_logging is true."
+  }
+}
+
+variable "logging_target_prefix" {
+  type        = string
+  description = "(optional) The key prefix under which the server access logs are stored in the target bucket"
+  default     = "s3-access-logs/"
+}
+
 # aws_s3_bucket_lifecycle_configuration variables
 variable "bucket_lifecycle_configuration_rule_noncurrent_version_expiration_noncurrent_days" {
   type        = number
