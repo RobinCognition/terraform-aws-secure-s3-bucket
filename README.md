@@ -70,6 +70,7 @@ module "terraform_state_s3_bucket" {
 | [aws_kms_key_policy.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/kms_key_policy) | resource |
 | [aws_s3_bucket.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket) | resource |
 | [aws_s3_bucket_lifecycle_configuration.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_lifecycle_configuration) | resource |
+| [aws_s3_bucket_logging.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_logging) | resource |
 | [aws_s3_bucket_policy.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_policy) | resource |
 | [aws_s3_bucket_public_access_block.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_public_access_block) | resource |
 | [aws_s3_bucket_server_side_encryption_configuration.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_server_side_encryption_configuration) | resource |
@@ -93,6 +94,9 @@ module "terraform_state_s3_bucket" {
 | <a name="input_bucket_lifecycle_configuration_rule_noncurrent_version_second_transition_noncurrent_days"></a> [bucket\_lifecycle\_configuration\_rule\_noncurrent\_version\_second\_transition\_noncurrent\_days](#input\_bucket\_lifecycle\_configuration\_rule\_noncurrent\_version\_second\_transition\_noncurrent\_days) | (optional) The number of days noncurrent object versions transition during the second transition | `number` | `60` | no |
 | <a name="input_bucket_lifecycle_configuration_rule_noncurrent_version_second_transition_storage_class"></a> [bucket\_lifecycle\_configuration\_rule\_noncurrent\_version\_second\_transition\_storage\_class](#input\_bucket\_lifecycle\_configuration\_rule\_noncurrent\_version\_second\_transition\_storage\_class) | (optional) The Amazon S3 storage class to which the object should be transitioned during the second transition | `string` | `"GLACIER"` | no |
 | <a name="input_bucket_name"></a> [bucket\_name](#input\_bucket\_name) | The name of the bucket | `string` | n/a | yes |
+| <a name="input_enable_access_logging"></a> [enable\_access\_logging](#input\_enable\_access\_logging) | (optional) Indicates whether S3 server access logging is enabled for this bucket | `bool` | `false` | no |
+| <a name="input_logging_target_bucket"></a> [logging\_target\_bucket](#input\_logging\_target\_bucket) | (optional) The name of the bucket that receives the server access logs, required if enable\_access\_logging is true | `string` | `null` | no |
+| <a name="input_logging_target_prefix"></a> [logging\_target\_prefix](#input\_logging\_target\_prefix) | (optional) The key prefix under which the server access logs are stored in the target bucket | `string` | `"s3-access-logs/"` | no |
 
 ## Outputs
 
@@ -105,6 +109,7 @@ module "terraform_state_s3_bucket" {
 | <a name="output_aws_s3_bucket_arn"></a> [aws\_s3\_bucket\_arn](#output\_aws\_s3\_bucket\_arn) | The ARN of the S3 bucket |
 | <a name="output_aws_s3_bucket_id"></a> [aws\_s3\_bucket\_id](#output\_aws\_s3\_bucket\_id) | The ID of the S3 bucket |
 | <a name="output_aws_s3_bucket_lifecycle_configuration_id"></a> [aws\_s3\_bucket\_lifecycle\_configuration\_id](#output\_aws\_s3\_bucket\_lifecycle\_configuration\_id) | The ID of the S3 bucket lifecycle configuration |
+| <a name="output_aws_s3_bucket_logging_id"></a> [aws\_s3\_bucket\_logging\_id](#output\_aws\_s3\_bucket\_logging\_id) | The ID of the S3 bucket logging configuration, null when access logging is disabled |
 | <a name="output_aws_s3_bucket_public_access_block_id"></a> [aws\_s3\_bucket\_public\_access\_block\_id](#output\_aws\_s3\_bucket\_public\_access\_block\_id) | The ID of the S3 bucket public access block |
 | <a name="output_aws_s3_bucket_server_side_encryption_configuration_id"></a> [aws\_s3\_bucket\_server\_side\_encryption\_configuration\_id](#output\_aws\_s3\_bucket\_server\_side\_encryption\_configuration\_id) | The ID of the S3 bucket server-side encryption configuration |
 | <a name="output_aws_s3_bucket_versioning_id"></a> [aws\_s3\_bucket\_versioning\_id](#output\_aws\_s3\_bucket\_versioning\_id) | The ID of the S3 bucket versioning |

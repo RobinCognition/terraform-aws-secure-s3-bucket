@@ -1,6 +1,5 @@
 data "aws_caller_identity" "current" {}
 
-#tfsec:ignore:aws-s3-enable-bucket-logging
 resource "aws_s3_bucket" "this" {
   bucket = var.bucket_name
 }
@@ -40,6 +39,15 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "this" {
       sse_algorithm     = "aws:kms"
     }
   }
+}
+
+resource "aws_s3_bucket_logging" "this" {
+  count = var.enable_access_logging ? 1 : 0
+
+  bucket = aws_s3_bucket.this.id
+
+  target_bucket = var.logging_target_bucket
+  target_prefix = var.logging_target_prefix
 }
 
 resource "aws_s3_bucket_versioning" "this" {

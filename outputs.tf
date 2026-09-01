@@ -15,6 +15,12 @@ output "aws_s3_bucket_server_side_encryption_configuration_id" {
   value       = aws_s3_bucket_server_side_encryption_configuration.this.id
 }
 
+# aws_s3_bucket_logging outputs
+output "aws_s3_bucket_logging_id" {
+  description = "The ID of the S3 bucket logging configuration, null when access logging is disabled"
+  value       = one(aws_s3_bucket_logging.this[*].id)
+}
+
 # aws_s3_bucket_versioning outputs
 output "aws_s3_bucket_versioning_id" {
   description = "The ID of the S3 bucket versioning"
